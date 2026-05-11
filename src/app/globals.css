@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core */
+    --background: 220 16% 96%;
+    --foreground: 224 20% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 20% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 20% 12%;
+    --primary: 252 87% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 90%;
+    --secondary-foreground: 224 20% 12%;
+    --muted: 220 14% 90%;
+    --muted-foreground: 220 14% 48%;
+    --accent: 220 14% 90%;
+    --accent-foreground: 224 20% 12%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 14% 88%;
+    --input: 220 14% 88%;
+    --ring: 252 87% 60%;
+    --radius: 0.75rem;
+
+    /* Sidebar */
+    --sidebar-bg: 220 18% 94%;
+    --sidebar-border: 220 14% 88%;
+    --sidebar-hover: 220 14% 90%;
+    --sidebar-active: 220 14% 87%;
+
+    /* Chat */
+    --chat-user: 252 87% 60%;
+    --chat-assistant: 0 0% 100%;
+  }
+
+  .dark {
+    /* Core */
+    --background: 224 20% 10%;
+    --foreground: 220 16% 92%;
+    --card: 224 20% 13%;
+    --card-foreground: 220 16% 92%;
+    --popover: 224 20% 13%;
+    --popover-foreground: 220 16% 92%;
+    --primary: 252 87% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 224 20% 17%;
+    --secondary-foreground: 220 16% 92%;
+    --muted: 224 20% 17%;
+    --muted-foreground: 220 14% 52%;
+    --accent: 224 20% 17%;
+    --accent-foreground: 220 16% 92%;
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 224 20% 18%;
+    --input: 224 20% 18%;
+    --ring: 252 87% 65%;
+
+    /* Sidebar */
+    --sidebar-bg: 224 22% 8%;
+    --sidebar-border: 224 20% 15%;
+    --sidebar-hover: 224 20% 14%;
+    --sidebar-active: 224 20% 16%;
+
+    /* Chat */
+    --chat-user: 252 87% 65%;
+    --chat-assistant: 224 20% 13%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  /* Thin scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 9999px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.3);
+  }
+
+  /* Hide scrollbar */
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Glassmorphism */
+  .glass {
+    background: hsl(var(--card) / 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Text gradient */
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(280 87% 65%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* Prose content styling for markdown */
+.prose-content {
+  @apply text-sm leading-relaxed text-foreground;
+}
+
+.prose-content > *:first-child {
+  @apply mt-0;
+}
+
+.prose-content > *:last-child {
+  @apply mb-0;
+}
+
+/* Selection */
+::selection {
+  background: hsl(var(--primary) / 0.25);
+  color: hsl(var(--foreground));
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Smooth theme transitions */
+* {
+  transition-property: background-color, border-color;
+  transition-duration: 150ms;
+  transition-timing-function: ease;
+}
+
+/* Don't animate transforms/opacity globally (conflicts with Framer Motion) */
+*, *::before, *::after {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
